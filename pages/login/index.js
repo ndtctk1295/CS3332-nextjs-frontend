@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 export default function LoginPage () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/auth/login`, {
+        const urlToFetch = `${process.env.NEXT_PUBLIC_API_URL}api/auth/login`;
+        const response = await fetch(urlToFetch, {
             method: 'POST',
             cors: 'no-cors',
             headers: {
@@ -17,11 +19,12 @@ export default function LoginPage () {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem('accessToken', data.jwt);
-            console.log('Login successful.');
-            console.log("jwt", data.jwt);
+            // console.log('Login successful.');
+            // console.log("jwt", data.jwt);
             router.push('/');
         } else{
             console.log('Login failed.');
+            setError('Login failed.');
         }
         // console.log(username, password);
     }
@@ -89,6 +92,10 @@ export default function LoginPage () {
                   >
                     Sign in
                   </button>
+                </div>
+
+                <div>
+                  {error && <p className="text-red-500 font-semibold text-xs pl-2">{error}</p>}
                 </div>
               </form>
     
