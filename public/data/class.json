@@ -1,0 +1,40 @@
+[
+        {"classCode": "IHAB",
+        "course": {
+            "courseCode": "1DL242",
+            "name": "Advanced software design",
+            "duration": " ",
+            "credits": 3,
+            "tuitionFeeCredits": 0,
+            "weight": 1.0
+        },
+        "maxStudents": 30,
+        "currentStudentCount": 25,
+        "startDate": "2023-09-01",
+        "endDate": "2023-12-15",
+        "classDays": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ]
+    },
+    {"classCode": "IHAB",
+        "course": {
+            "courseCode": "1DL242",
+            "name": "Advanced software design",
+            "duration": " ",
+            "credits": 3,
+            "tuitionFeeCredits": 0,
+            "weight": 1.0
+        },
+        "maxStudents": 30,
+        "currentStudentCount": 25,
+        "startDate": "2023-09-01",
+        "endDate": "2023-12-15",
+        "classDays": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ]
+    }
+    ]
