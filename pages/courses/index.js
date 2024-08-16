@@ -60,7 +60,12 @@ export default function AllCoursesPage() {
       }
     );
     if (response.ok) {
+<<<<<<< HEAD
       alert("Course created successfully");
+=======
+      alert("Course deleted successfully");
+      router.reload();
+>>>>>>> 56d291b (Sua delete)
       router.push("/courses");
     } else {
       alert("Failed to create course");
