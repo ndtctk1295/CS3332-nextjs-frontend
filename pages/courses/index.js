@@ -62,6 +62,7 @@ export default function AllCoursesPage() {
     );
     if (response.ok) {
       alert("Course deleted successfully");
+      router.reload();
       router.push("/courses");
     } else {
       alert("Failed to delete course");
