@@ -1,6 +1,8 @@
 import CourseForm from "../../components/CourseForm";
+import { useRouter } from "next/router";
 
 const CreateCoursePage = () => {
+  const router = useRouter();
   const handleSubmit = async (formData) => {
     try {
       if (
@@ -15,7 +17,7 @@ const CreateCoursePage = () => {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/courses/create`,
           {
             method: "POST",
-            credentials: "include",
+            // credentials: "include",
             headers: new Headers({
               Authorization: "Bearer " + accessToken,
               "Content-Type": "application/json",

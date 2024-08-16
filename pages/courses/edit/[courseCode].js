@@ -16,14 +16,16 @@ const EditCoursePage = () => {
           const accessToken = localStorage.getItem("accessToken");
           const response = await fetch(urlToFetch, {
             method: "GET",
-            credentials: "include",
+            // credentials: "include",
             headers: new Headers({
               Authorization: "Bearer " + accessToken,
               "Content-Type": "application/json",
             }),
+            cors: 'no-cors',
           });
           if (response.ok) {
             const data = await response.json();
+            console.log(data.data);
             setInitialData(data.data);
           } else {
             console.error("Failed to fetch course data");
@@ -55,7 +57,7 @@ const EditCoursePage = () => {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/courses/update/${courseCode}`,
           {
             method: "PUT",
-            credentials: "include",
+            // credentials: "include",
             headers: new Headers({
               Authorization: "Bearer " + accessToken,
               "Content-Type": "application/json",

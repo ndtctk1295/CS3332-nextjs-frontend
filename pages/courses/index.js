@@ -47,12 +47,13 @@ export default function AllCoursesPage() {
   };
 
   const handleDelete = async (courseID) => {
+    
     const accessToken = localStorage.getItem("accessToken");
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/courses/delete/${courseID}`,
       {
         method: "DELETE",
-        credentials: "include",
+        // credentials: "include",
         headers: new Headers({
           Authorization: "Bearer " + accessToken,
           "Content-Type": "application/json",
@@ -60,10 +61,10 @@ export default function AllCoursesPage() {
       }
     );
     if (response.ok) {
-      alert("Course created successfully");
+      alert("Course deleted successfully");
       router.push("/courses");
     } else {
-      alert("Failed to create course");
+      alert("Failed to delete course");
     }
   };
 
