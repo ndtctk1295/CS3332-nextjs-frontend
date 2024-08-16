@@ -8,6 +8,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     tuitionFeeCredits: initialData.tuitionFeeCredits || 0,
     weight: initialData.weight || 1.0,
   });
+
   useEffect(() => {
     setCourseData({
       courseCode: initialData.courseCode || "",
@@ -26,7 +27,8 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
   // console.log(courseData);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCourseData((prevState) => ({
+
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -53,9 +55,8 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 w-full max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg"
+      className="space-y-6 max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg"
     >
-      <h1 className="text-center text-2xl">Course Details</h1>
       <div>
         <label className="block text-sm font-medium text-gray-700">
           Course Code
@@ -63,9 +64,6 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
         <input
           readOnly={setConditionReadonlyCode()}
           onChange={handleChange}
-          type="text"
-          name="courseCode"
-          value={courseData.courseCode}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
@@ -74,11 +72,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Course Name
         </label>
         <input
-          readOnly={setConditionReadonly()}
-          onChange={handleChange}
           type="text"
-          name="name"
-          value={courseData.name}
+          name="name" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.name}
+          onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
@@ -87,11 +84,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Course Duration
         </label>
         <input
-          readOnly={setConditionReadonly()}
-          onChange={handleChange}
           type="text"
-          name="duration"
-          value={courseData.duration}
+          name="duration" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.duration}
+          onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
@@ -100,11 +96,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Credits
         </label>
         <input
-          readOnly={setConditionReadonly()}
-          onChange={handleChange}
           type="number"
-          name="credits"
-          value={courseData.credits}
+          name="credits" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.credits}
+          onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
@@ -113,11 +108,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Tuition Fee Credits
         </label>
         <input
-          readOnly={setConditionReadonly()}
-          onChange={handleChange}
           type="number"
-          name="tuitionFeeCredits"
-          value={courseData.tuitionFeeCredits}
+          name="tuitionFeeCredits" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.tuitionFeeCredits}
+          onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
@@ -126,11 +120,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Weight
         </label>
         <input
-          readOnly={setConditionReadonly()}
-          onChange={handleChange}
           type="number"
-          name="weight"
-          value={courseData.weight}
+          name="weight" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.weight}
+          onChange={handleChange}
           step="0.1"
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
@@ -147,4 +140,5 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     </form>
   );
 };
+
 export default CourseForm;
