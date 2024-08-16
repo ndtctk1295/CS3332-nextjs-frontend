@@ -18,10 +18,11 @@ export default function LoginPage () {
           });
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('accessToken', data.jwt);
+            // localStorage.setItem('accessToken', "");
+            localStorage.setItem('accessToken', data.data.accessToken);
             // console.log('Login successful.');
-            // console.log("jwt", data.jwt);
-            router.push('/');
+            // console.log("jwt", data);
+            router.push('/classes');
         } else{
             console.log('Login failed.');
             setError('Login failed.');
