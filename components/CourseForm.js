@@ -9,6 +9,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     weight: initialData.weight || 1.0,
   });
 
+
   useEffect(() => {
     setCourseData({
       courseCode: initialData.courseCode || "",
@@ -27,6 +28,8 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
   // console.log(courseData);
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    setFormData((prevState) => ({
 
     setFormData((prevState) => ({
       ...prevState,
@@ -56,6 +59,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     <form
       onSubmit={handleSubmit}
       className="space-y-6 max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg"
+      className="space-y-6 max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg"
     >
       <div>
         <label className="block text-sm font-medium text-gray-700">
@@ -75,6 +79,9 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           type="text"
           name="name" // Cập nhật name cho phù hợp với khóa trong formData
           value={formData.name}
+          type="text"
+          name="name" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.name}
           onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
@@ -84,6 +91,9 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Course Duration
         </label>
         <input
+          type="text"
+          name="duration" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.duration}
           type="text"
           name="duration" // Cập nhật name cho phù hợp với khóa trong formData
           value={formData.duration}
@@ -99,6 +109,9 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           type="number"
           name="credits" // Cập nhật name cho phù hợp với khóa trong formData
           value={formData.credits}
+          type="number"
+          name="credits" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.credits}
           onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
@@ -111,6 +124,9 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           type="number"
           name="tuitionFeeCredits" // Cập nhật name cho phù hợp với khóa trong formData
           value={formData.tuitionFeeCredits}
+          type="number"
+          name="tuitionFeeCredits" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.tuitionFeeCredits}
           onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
@@ -120,6 +136,9 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Weight
         </label>
         <input
+          type="number"
+          name="weight" // Cập nhật name cho phù hợp với khóa trong formData
+          value={formData.weight}
           type="number"
           name="weight" // Cập nhật name cho phù hợp với khóa trong formData
           value={formData.weight}
@@ -140,5 +159,6 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     </form>
   );
 };
+
 
 export default CourseForm;
