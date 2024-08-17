@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
 
-const withAuth = (WrappedComponent) => {
+const withAuth = (WrappedComponent, allowedRoles = []) => {
   return (props) => {
     const { user } = useAuth();
     const router = useRouter();
@@ -10,10 +10,12 @@ const withAuth = (WrappedComponent) => {
     useEffect(() => {
       if (!user) {
         router.push('/login');
+      } else if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+        router.push('/unauthorized'); // Redirect to an unauthorized page
       }
-    }, [user, router]);
+    }, [user, router, allowedRoles]);
 
-    if (!user) {
+    if (!user || (allowedRoles.length > 0 && !allowedRoles.includes(user.role))) {
       return null; // Or you can return a loading spinner
     }
 

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext";
 export default function LoginPage () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+    const {login} = useAuth();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const urlToFetch = `${process.env.NEXT_PUBLIC_API_URL}api/auth/login`;
@@ -19,16 +21,28 @@ export default function LoginPage () {
         if (response.ok) {
             const data = await response.json();
             // localStorage.setItem('accessToken', "");
-            localStorage.setItem('accessToken', data.data.accessToken);
+            // localStorage.setItem('accessToken', data.data.accessToken);
+            handleLoginSuccess(data.data); // Call the success handler
             // console.log('Login successful.');
             // console.log("jwt", data);
-            router.push('/classes');
+            // router.push('admin/classes');
         } else{
             console.log('Login failed.');
             setError('Login failed.');
         }
         // console.log(username, password);
     }
+    const handleLoginSuccess = (userData) => {
+
+      login(userData); // Call the login function from AuthContext
+  
+      // Redirect based on user role
+      if (userData.role === 'ROLE_STUDENT') {
+        router.push('/student');
+      } else if (userData.role === 'ROLE_ADMIN') {
+        router.push('/admin');
+      }
+    };
     return (
         <>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

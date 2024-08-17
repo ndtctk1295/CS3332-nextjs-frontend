@@ -8,23 +8,32 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user is logged in (you might want to check a accessToken in localStorage)
+    // Check if user is logged in (check accessToken in localStorage)
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      // Fetch user data or set the user state
-      setUser({ accessToken }); // Simplified example, ideally you fetch user info from the backend
+      // Fetch user data (including role) from the backend or from localStorage
+      const userRole = localStorage.getItem('userRole');
+      if (userRole) {
+        setUser({ accessToken, role: userRole });
+      } else {
+        // Optionally fetch user data from the backend if needed
+        // Example: fetchUserData(accessToken);
+      }
     } else {
       setUser(null);
     }
   }, []);
 
   const login = (userData) => {
+    // console.log('userData', userData);
     localStorage.setItem('accessToken', userData.accessToken);
+    localStorage.setItem('userRole', userData.role);
     setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userRole');
     setUser(null);
     router.push('/login');
   };

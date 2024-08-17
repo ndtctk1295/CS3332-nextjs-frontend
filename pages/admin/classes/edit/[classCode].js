@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ClassForm from '../../../components/ClassForm';
+import ClassForm from '../../../../components/ClassForm';
 import CourseForm from '@/components/CourseForm';
 // import data from "@/public/data/class.json"
 const EditClassPage = () => {

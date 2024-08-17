@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
   const [courseData, setCourseData] = useState({
     courseCode: initialData.courseCode || "",
@@ -18,9 +18,10 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
       weight: initialData.weight || 1.0,
     });
   }, [initialData]);
+  // console.log(courseData)
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(classData);
+    onSubmit(courseData);
   };
   // console.log(courseData);
   const handleChange = (e) => {
@@ -30,12 +31,25 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
       [name]: value,
     }));
   };
-  const setConditionReadonly = () => {
-    if (actionType === "editClass") {
+  const setConditionReadonlyCode = () => {
+    if (actionType === "editCourse" || actionType === "editClass" || actionType === "createClass") {
       return true;
     }
     return false;
+  }
+  const setConditionReadonly = () => {
+    if (actionType === "editCourse" || actionType === "createCourse") {
+      return false;
+    }
+    return true;
   };
+  const setConditionButton = () => {
+    if(actionType === "editCourse" || actionType === "editClass" || actionType === "createClass"){
+      // console.log("hidden");
+      return "hidden";
+    }
+    else return "";
+  }
   return (
     <form
       onSubmit={handleSubmit}
@@ -47,7 +61,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           Course Code
         </label>
         <input
-          readOnly
+          readOnly={setConditionReadonlyCode()}
           onChange={handleChange}
           type="text"
           name="courseCode"
@@ -124,8 +138,8 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
       <button
         type="submit"
         className={
-          "w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" +
-          (setConditionReadonly() ? " hidden" : "")
+          "w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " +
+          (setConditionButton())
         }
       >
         Save

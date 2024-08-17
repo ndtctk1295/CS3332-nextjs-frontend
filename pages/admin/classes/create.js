@@ -1,4 +1,4 @@
-import ClassForm from '../../components/ClassForm';
+import ClassForm from '../../../components/ClassForm';
 import CourseForm from '@/components/CourseForm';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -77,11 +77,13 @@ const CreateClassPage = () => {
   }
 
   return (
+    <>
     <section className='flex justify-center items-center min-h-screen' >
       <button onClick={handleGoBack} className='absolute top-10 left-10 bg-blue-500 px-4 py-2 border border-neutral-500 text-white rounded-lg'>Go back</button>
       <ClassForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"} />
       <CourseForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"}/>
     </section>
+    </>
   );
 };
 

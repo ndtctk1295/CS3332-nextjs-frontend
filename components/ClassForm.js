@@ -28,6 +28,12 @@ const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType
     }
     return true;
   };
+  const setConditionReadonlyCode = () => {
+    if (actionType === "editCourse" || actionType === "editClass") {
+      return true;
+    }
+    return false;
+  }
   const setConditionButton = () => {
     if(actionType === "editClass"){
       return "hidden";
@@ -63,6 +69,7 @@ const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType
         <div>
           <label className="block text-sm font-medium text-gray-700">Class Code</label>
           <input
+            readOnly={setConditionReadonlyCode()}
             type="text"
             name="classCode"
             value={classData.classCode}
