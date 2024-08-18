@@ -9,9 +9,14 @@ module.exports = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "BK-header": "url('/bg/header.png')",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+
       },
+      colors: {
+        "BK-button-red": "#aa261b"
+      }
     },
   },
   plugins: [
