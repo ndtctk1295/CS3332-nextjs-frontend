@@ -1,18 +1,7 @@
-// const DashboardPage = () => {
-//   return (
-//     <div>
-//       <h1>Student Dashboard</h1>
-//       <button>
-//         <a href="/admin">go to admin test</a>
-//       </button>
-//     </div>
-//   );
-// };
-// export default DashboardPage;
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
+import StudentHeader from '@/components/StudentHeader';
 
 export default function StudentCoursesPage() {
     const [courses, setCourses] = useState([]);
@@ -59,7 +48,7 @@ export default function StudentCoursesPage() {
 
     return (
         <div>
-            <Header title="Courses" />
+            <StudentHeader title="Courses Available" />
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center my-4">
                     <h1 className="text-3xl font-semibold">All Courses</h1>

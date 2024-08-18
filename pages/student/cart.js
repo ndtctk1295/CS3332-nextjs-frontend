@@ -74,6 +74,34 @@ const CartPage = () => {
         }
     };
 
+    const handleRegisterAllCourses = async () => {
+      try {  
+          const accessToken = localStorage.getItem("accessToken");
+          const response = await fetch(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/class-enrollment/cart/register-all`,
+              {
+                  method: "POST",
+                  headers: new Headers({
+                      Authorization: "Bearer " + accessToken,
+                      "Content-Type": "application/json",
+                  }),
+                  cor : "no-cors",
+              }
+          );
+          const data = await response.json();
+          if (response.ok) {
+              alert("All classes registered successfully");
+              router.reload();
+              router.push("/student/cart");
+          } else {
+              alert('Failed to register all classes: ' + data.message);
+          }
+      } catch (error) {
+          console.error("Error registering all classes:", error);
+          alert("Error registering all classes");
+      }
+    };
+
   return (
     <div className="container mx-auto p-4">
       <Header title="Cart" />
@@ -102,13 +130,21 @@ const CartPage = () => {
 
                 <button
                     onClick={() => handleRegisterOne(item.enrolledClass.classCode)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-red-500 text-white px-4 py-2 rounded"
                 >
                     Register One
                 </button>
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center mt-4">
+                <button
+                    onClick={handleRegisterAllCourses}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                    Register All Courses
+                </button>
       </div>
     </div>
   );

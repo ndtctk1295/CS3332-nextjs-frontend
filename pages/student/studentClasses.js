@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
+import StudentHeader from "@/components/StudentHeader";
 
 export default function StudentClassesPage() {
     const [classes, setClasses] = useState([]);
@@ -68,9 +69,9 @@ export default function StudentClassesPage() {
     );
 
     return (
-        <div className="container mx-auto p-4">
-            <Header />
-            <h1 className="text-2xl font-bold mb-4">Classes</h1>
+        <div>
+            <StudentHeader/>
+            <h1 className="text-2xl font-bold mb-4">Classes Available for {courseCode}</h1>
             <div className="mb-4">
                 <input
                     type="text"
