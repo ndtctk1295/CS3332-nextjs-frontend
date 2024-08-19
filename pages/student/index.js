@@ -61,30 +61,30 @@ export default function StudentCoursesPage() {
                     />
                 </div>
                 <div className="grid gap-4">
-          {filteredCourses.map((course) => (
-            <div
-              key={course["courseCode"]}
-              className="p-4 border border-gray-300 rounded flex justify-between items-center"
-            >
-              <div>
-                <h2 className="text-xl font-semibold">{course["name"]}</h2>
-                <p>Course ID: {course["courseCode"]}</p>
-                <p>Duration: {course["duration"]}</p>
-                <p>Credits: {course["credits"]}</p>
-                <p>Tuition Fee Credits: {course["tuitionFeeCredits"]}</p>
-                <p>Weight: {course["weight"]}</p>
-              </div>
-              <div>
-              <button
-                  onClick={() => handleCourseClick(course["courseCode"])}
-                  className="bg-yellow-500 text-white px-4 py-2 rounded mr-2"
-                >
-                  Enroll
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+                    {filteredCourses.map((course) => (
+                        <div
+                            key={course["courseCode"]}
+                            className="p-4 border border-gray-300 rounded flex justify-between items-center"
+                        >
+                            <div>
+                                <h2 className="text-xl font-semibold">{course["name"]}</h2>
+                                <p>Course ID: {course["courseCode"]}</p>
+                                <p>Duration: {course["duration"]}</p>
+                                <p>Credits: {course["credits"]}</p>
+                                <p>Tuition Fee Credits: {course["tuitionFeeCredits"]}</p>
+                                <p>Weight: {course["weight"]}</p>
+                            </div>
+                            <div>
+                                <button
+                                    onClick={() => handleCourseClick(course["courseCode"])}
+                                    className="bg-yellow-500 text-white px-4 py-2 rounded mr-2"
+                                >
+                                    Enroll
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

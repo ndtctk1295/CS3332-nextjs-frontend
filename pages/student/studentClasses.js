@@ -52,8 +52,8 @@ export default function StudentClassesPage() {
             });
             const data = await response.json();
             if (response.ok) {
-              alert("Add to cart successfully");
-              router.push("/student");
+                alert("Add to cart successfully");
+                router.push("/student");
             } else {
                 alert(`Failed to add class to cart: ${data.message}`);
             }
@@ -70,41 +70,43 @@ export default function StudentClassesPage() {
 
     return (
         <div>
-            <StudentHeader/>
-            <h1 className="text-2xl font-bold mb-4">Classes Available for {courseCode}</h1>
-            <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Search by name or code..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                    className="border border-gray-300 rounded px-4 py-2 w-full"
-                />
-            </div>
-            <div className="grid gap-4">
-                {filteredClasses.map((course) => (
-                    <div
-                        key={course["classCode"]}
-                        className="p-4 border border-gray-300 rounded flex justify-between items-center"
-                    >
-                        <div>
-                            <h2 className="text-xl font-semibold">{course.course["name"]}</h2>
-                            <p>Class Code: {course["classCode"]}</p>
-                            <p>Course Code: {course.course["courseCode"]}</p>
-                            <p>Max Students: {course["maxStudents"]}</p>
-                            <p>Start Date: {course["startDate"]}</p>
-                            <p>End Date: {course["endDate"]}</p>
+            <StudentHeader title="Classes Available" />
+            <div className="container mx-auto px-4">
+                <div className="flex justify-between items-center my-4">
+                    <h1 className="text-3xl font-semibold">Classes Available for {courseCode}</h1>
+                    <input
+                        type="text"
+                        placeholder="Search by course name or code"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="border border-gray-300 rounded p-2 w-1/3"
+                    />
+                </div>
+                <div className="grid gap-4">
+                    {filteredClasses.map((course) => (
+                        <div
+                            key={course["classCode"]}
+                            className="p-4 border border-gray-300 rounded flex justify-between items-center"
+                        >
+                            <div>
+                                <h2 className="text-xl font-semibold">{course.course["name"]}</h2>
+                                <p>Class Code: {course["classCode"]}</p>
+                                <p>Course Code: {course.course["courseCode"]}</p>
+                                <p>Max Students: {course["maxStudents"]}</p>
+                                <p>Start Date: {course["startDate"]}</p>
+                                <p>End Date: {course["endDate"]}</p>
+                            </div>
+                            <div className="flex space-x-2">
+                                <button
+                                    onClick={() => handleAddToCart(course["classCode"])}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex space-x-2">
-                            <button
-                                onClick={() => handleAddToCart(course["classCode"])}
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
-                            >
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
