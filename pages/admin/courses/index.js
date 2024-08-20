@@ -100,7 +100,7 @@ import { useAuth } from '@/context/AuthContext';
       </div>
       <button
         onClick={handleCreateCourse}
-        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
+        className="mb-4 bg-blue-500 hover:opacity-90 text-white px-4 py-2 rounded"
       >
         Create New Course
       </button>
@@ -122,13 +122,13 @@ import { useAuth } from '@/context/AuthContext';
       <div className="flex space-x-2">
         <button
           onClick={() => handleEdit(course.courseCode)}
-          className="bg-yellow-500 text-white px-4 py-2 rounded"
+          className="bg-yellow-500 hover:opacity-90 text-white px-4 py-2 rounded"
         >
           Edit
         </button>
         <button
           onClick={() => handleDelete(course.courseCode)}
-          className="bg-red-500 text-white px-4 py-2 rounded"
+          className="bg-red-500 hover:opacity-90 text-white px-4 py-2 rounded"
         >
           Delete
         </button>

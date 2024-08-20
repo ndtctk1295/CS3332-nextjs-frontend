@@ -74,7 +74,7 @@ export default function EnrollmentHistoryPage() {
                 <div>
                 <button
                     onClick={() => handleDropClass(enrollment.enrolledClass.classCode)}
-                    className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+                    className="bg-red-500 hover:opacity-90 text-white px-4 py-2 rounded mr-2"
                 >
                     Drop Class
                 </button>

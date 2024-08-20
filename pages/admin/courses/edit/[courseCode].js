@@ -84,7 +84,7 @@ const EditCoursePage = () => {
   return (
     <div>
       <h1>Edit Course</h1>
-      <button onClick={handleGoBack} className='absolute top-10 left-10 bg-blue-500 px-4 py-2 border border-neutral-500 text-white rounded-lg'>Go back</button>
+      <button onClick={handleGoBack} className='absolute top-10 left-10 bg-blue-500 px-4 py-2 hover:opacity-90 border border-neutral-500 text-white rounded-lg'>Go back</button>
 
       <CourseForm actionType={"editCourse"} initialData={initialData} onSubmit={handleSubmit} />
     </div>

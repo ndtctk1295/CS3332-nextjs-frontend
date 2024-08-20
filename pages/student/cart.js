@@ -6,7 +6,7 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
-
+  const role = user.role ? user.role : 'ROLE_STUDENT';
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -105,7 +105,7 @@ const CartPage = () => {
 
   return (
     <>
-      <Header role={user.role}/>
+      <Header role={role}/>
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
       <div className="grid gap-4">
@@ -125,14 +125,14 @@ const CartPage = () => {
             <div>
                 <button
                     onClick={() => handleRemoveFromCart(item.enrolledClass.classCode)}
-                    className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+                    className="bg-red-500 hover:opacity-90 text-white px-4 py-2 rounded mr-2"
                 >
                     Remove from Cart
                 </button>
 
                 <button
                     onClick={() => handleRegisterOne(item.enrolledClass.classCode)}
-                    className="bg-red-500 text-white px-4 py-2 rounded"
+                    className="bg-red-500 hover:opacity-90 text-white px-4 py-2 rounded"
                 >
                     Register One
                 </button>
@@ -143,7 +143,7 @@ const CartPage = () => {
       <div className="flex justify-center mt-4">
                 <button
                     onClick={handleRegisterAllCourses}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 hover:opacity-90 text-white px-4 py-2 rounded"
                 >
                     Register All Courses
                 </button>

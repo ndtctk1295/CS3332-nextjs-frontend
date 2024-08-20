@@ -37,10 +37,8 @@ const {logout} = useAuth();
           </Link>
           </button>
         </div>
-        <button className='bg-BK-button-red hover:opacity-80 px-4 py-2 rounded-lg text-center' onClick={logout}>
-          <span  className='block mt-4 lg:mt-0 text-white hover:text-white'>
+        <button className='bg-BK-button-red hover:opacity-80 px-4 py-2 rounded-lg text-center text-white break-normal whitespace-nowrap' onClick={logout}>      
             Sign out
-          </span>
         </button>
       </div>
     </nav>

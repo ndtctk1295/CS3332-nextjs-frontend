@@ -11,7 +11,7 @@ import { useAuth } from '@/context/AuthContext';
   const { user } = useAuth();
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
+    // console.log(accessToken)
     const fetchClasses = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/classes/all`, {
@@ -23,7 +23,7 @@ import { useAuth } from '@/context/AuthContext';
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data.data)
+          // console.log(data.data)
           setClasses(data.data);
         } else {
           console.error('Failed to fetch classes');
@@ -99,15 +99,15 @@ import { useAuth } from '@/context/AuthContext';
       </div>
       <button
         onClick={handleCreateCourse}
-        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
+        className="mb-4 bg-blue-500 hover:opacity-90 text-white px-4 py-2 rounded"
       >
         Create New Class
       </button>
-      <div className="grid gap-4">
+      <div className="grid gap-4 ">
       {filteredClasses.map((course) => (
     <div
       key={course.classCode}
-      className="p-4 border border-gray-300 rounded flex justify-between items-center"
+      className="p-4 border shadow-md hover:shadow-lg border-gray-300 rounded flex justify-between items-center"
     >
       <div>
         <h2 className="text-xl font-semibold">{course.course.name}</h2>
@@ -120,13 +120,13 @@ import { useAuth } from '@/context/AuthContext';
       <div className="flex space-x-2">
         <button
           onClick={() => handleEdit(course.classCode)}
-          className="bg-yellow-500 text-white px-4 py-2 rounded"
+          className="bg-yellow-500 hover:opacity-90 text-white px-4 py-2 rounded"
         >
           Edit
         </button>
         <button
           onClick={() => handleDelete(course.classCode)}
-          className="bg-red-500 text-white px-4 py-2 rounded"
+          className="bg-red-500 hover:opacity-90 text-white px-4 py-2 rounded"
         >
           Delete
         </button>

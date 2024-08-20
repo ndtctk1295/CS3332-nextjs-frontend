@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 export default function LoginPage () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -47,12 +48,14 @@ export default function LoginPage () {
         <>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <img
+              <Image
                 alt="Your Company"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="mx-auto h-10 w-auto"
+                src="/logo/dai-hoc-bach-khoa-ha-noi.jpg"
+                className="mx-auto w-auto"
+                width={200}
+                height={400}
               />
-              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              <h2 className="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Sign in to your account
               </h2>
             </div>
@@ -113,13 +116,6 @@ export default function LoginPage () {
                   {error && <p className="text-red-500 font-semibold text-xs pl-2">{error}</p>}
                 </div>
               </form>
-    
-              <p className="mt-10 text-center text-sm text-gray-500">
-                Not a member?{' '}
-                <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                  Start a 14 day free trial
-                </a>
-              </p>
             </div>
           </div>
         </>

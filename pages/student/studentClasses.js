@@ -9,6 +9,7 @@ export default function StudentClassesPage() {
     const router = useRouter();
     const { courseCode } = router.query;
     const { user } = useAuth();
+    console.log(user)
     useEffect(() => {
         if (courseCode) {
             const fetchClasses = async () => {
@@ -100,7 +101,7 @@ export default function StudentClassesPage() {
                         <div className="flex space-x-2">
                             <button
                                 onClick={() => handleAddToCart(course["classCode"])}
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                                className="bg-blue-500 hover:opacity-90 text-white px-4 py-2 rounded"
                             >
                                 Add to Cart
                             </button>

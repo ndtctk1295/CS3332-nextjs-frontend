@@ -51,7 +51,7 @@ const CreateCoursePage = () => {
   return (
     <div>
       <h1>Create New Course</h1>
-      <button onClick={handleGoBack} className='absolute top-10 left-10 bg-blue-500 px-4 py-2 border border-neutral-500 text-white rounded-lg'>Go back</button>
+      <button onClick={handleGoBack} className='absolute top-10 hover:opacity-90 left-10 bg-blue-500 px-4 py-2 border border-neutral-500 text-white rounded-lg'>Go back</button>
       <CourseForm initialData={initialData}  onSubmit={handleSubmit} actionType={"createCourse"} />
     </div>
   );

@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import { useAuth } from "@/context/AuthContext";
 import withAuth from "@/hoc/withAuth"
+import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 const getAllStudentsPage = () => {
     const [students, setStudents] = useState([]);
@@ -48,7 +49,10 @@ const getAllStudentsPage = () => {
     <Header role={user.role}/>
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">All Students</h1>
-      <div className="overflow-x-auto">
+      <button class="bg-blue-500 px-4 py-2 border border-neutral-500 hover:opacity-90 text-white rounded-lg">
+        <Link href="/admin/students/register">Register new student</Link>
+      </button>
+      <div className="overflow-x-auto mt-4">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-100 text-gray-700">
