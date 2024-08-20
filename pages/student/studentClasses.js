@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import StudentHeader from "@/components/StudentHeader";
-
+import { useAuth } from "@/context/AuthContext";
 export default function StudentClassesPage() {
     const [classes, setClasses] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const router = useRouter();
     const { courseCode } = router.query;
-
+    const { user } = useAuth();
     useEffect(() => {
         if (courseCode) {
             const fetchClasses = async () => {
                 try {
-                    const urlToFetch = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/classes/by-course/${courseCode}`;
+                    const urlToFetch = `${process.env.NEXT_PUBLIC_API_URL}api/classes/by-course/${courseCode}`;
                     const accessToken = localStorage.getItem("accessToken");
                     const response = await fetch(urlToFetch, {
                         method: "GET",
@@ -26,6 +26,7 @@ export default function StudentClassesPage() {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const data = await response.json();
+                    // console.log(data)
                     setClasses(data.data);
                 } catch (error) {
                     console.error("Error fetching classes:", error);
@@ -41,7 +42,7 @@ export default function StudentClassesPage() {
 
     const handleAddToCart = async (classCode) => {
         try {
-            const urlToFetch = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/class-enrollment/cart/add?classCode=${classCode}`;
+            const urlToFetch = `${process.env.NEXT_PUBLIC_API_URL}api/class-enrollment/cart/add?classCode=${classCode}`;
             const accessToken = localStorage.getItem("accessToken");
             const response = await fetch(urlToFetch, {
                 method: "POST",
@@ -52,8 +53,8 @@ export default function StudentClassesPage() {
             });
             const data = await response.json();
             if (response.ok) {
-                alert("Add to cart successfully");
-                router.push("/student");
+              alert("Add to cart successfully");
+              router.push("/student");
             } else {
                 alert(`Failed to add class to cart: ${data.message}`);
             }
@@ -69,45 +70,45 @@ export default function StudentClassesPage() {
     );
 
     return (
-        <div>
-            <StudentHeader title="Classes Available" />
-            <div className="container mx-auto px-4">
-                <div className="flex justify-between items-center my-4">
-                    <h1 className="text-3xl font-semibold">Classes Available for {courseCode}</h1>
-                    <input
-                        type="text"
-                        placeholder="Search by course name or code"
-                        value={searchTerm}
-                        onChange={handleSearch}
-                        className="border border-gray-300 rounded p-2 w-1/3"
-                    />
-                </div>
-                <div className="grid gap-4">
-                    {filteredClasses.map((course) => (
-                        <div
-                            key={course["classCode"]}
-                            className="p-4 border border-gray-300 rounded flex justify-between items-center"
-                        >
-                            <div>
-                                <h2 className="text-xl font-semibold">{course.course["name"]}</h2>
-                                <p>Class Code: {course["classCode"]}</p>
-                                <p>Course Code: {course.course["courseCode"]}</p>
-                                <p>Max Students: {course["maxStudents"]}</p>
-                                <p>Start Date: {course["startDate"]}</p>
-                                <p>End Date: {course["endDate"]}</p>
-                            </div>
-                            <div className="flex space-x-2">
-                                <button
-                                    onClick={() => handleAddToCart(course["classCode"])}
-                                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                                >
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+        <>
+        <Header role={user.role}/>
+        <section className="px-6 md:px-12 mt-4">
+            <h1 className="text-2xl font-bold mb-4">Classes Available for {courseCode}</h1>
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Search by name or code..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                />
             </div>
-        </div>
+            <div className="grid gap-4">
+                {filteredClasses.map((course) => (
+                    <div
+                        key={course["classCode"]}
+                        className="p-4 border border-gray-300 rounded flex justify-between items-center"
+                    >
+                        <div>
+                            <h2 className="text-xl font-semibold">{course.course["name"]}</h2>
+                            <p>Class Code: {course["classCode"]}</p>
+                            <p>Course Code: {course.course["courseCode"]}</p>
+                            <p>Max Students: {course["maxStudents"]}</p>
+                            <p>Start Date: {course["startDate"]}</p>
+                            <p>End Date: {course["endDate"]}</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <button
+                                onClick={() => handleAddToCart(course["classCode"])}
+                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+        </>
     );
 }

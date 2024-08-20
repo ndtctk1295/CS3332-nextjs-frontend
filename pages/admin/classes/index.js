@@ -3,11 +3,12 @@ import { useRouter } from 'next/router';
 import withAuth from '@/hoc/withAuth';
 import data from "@/public/data/class.json"
 import Header from '@/components/Header';
+import { useAuth } from '@/context/AuthContext';
  const ClassesPage = () => {
   const [classes, setClasses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-
+  const { user } = useAuth();
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken)
@@ -84,7 +85,7 @@ import Header from '@/components/Header';
 
   return (
     <>
-    <Header/>
+    <Header role={user.role}/>
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Classes</h1>
       <div className="mb-4">
