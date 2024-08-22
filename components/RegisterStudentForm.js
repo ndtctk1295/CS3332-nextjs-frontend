@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import student from '@/pages/student';
 const RegisterStudentForm = () => {
   const [studentData, setStudentData] = useState({
     username: '',
@@ -8,6 +9,7 @@ const RegisterStudentForm = () => {
     program: '',
     maxCredits: 0,
   });
+  const [msg, setMsg] = useState('');
   const router = useRouter();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,33 +22,37 @@ const RegisterStudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const accessToken = localStorage.getItem('accessToken');
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/auth/register/student`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        cors: 'no-cors',
-        body: JSON.stringify(studentData),
-      });
-
-      if (response.ok) {
-        alert('Student registered successfully');
-        router.push('/admin/students');
-        setStudentData({
-          username: '',
-          password: '',
-          name: '',
-          program: '',
-          maxCredits: 0,
+    if(studentData.maxCredits <= 0 || studentData.username === "" || studentData.password === "" || studentData.name === "" || studentData.program === ""){
+      setMsg('Please fill in all fields and max credits are not allowed to be less than 0');
+    } else {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/auth/register/student`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          cors: 'no-cors',
+          body: JSON.stringify(studentData),
         });
-      } else {
-        alert('Failed to register student');
+  
+        if (response.ok) {
+          alert('Student registered successfully');
+          router.push('/admin/students');
+          setStudentData({
+            username: '',
+            password: '',
+            name: '',
+            program: '',
+            maxCredits: 0,
+          });
+        } else {
+          alert('Failed to register student');
+        }
+      } catch (error) {
+        console.error('Error registering student:', error);
+        alert('An error occurred while registering the student');
       }
-    } catch (error) {
-      console.error('Error registering student:', error);
-      alert('An error occurred while registering the student');
     }
   };
 
@@ -121,6 +127,7 @@ const RegisterStudentForm = () => {
           required
         />
       </div>
+      {msg && <p className="text-red-500 text-sm">{msg}</p>}
       <button
         type="submit"
         className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -12,6 +12,7 @@ const CreateClassPage = () => {
     endDate: '',
     classDays: '',
   });
+  const [resMsg, setResMsg] = useState('');
   const [isCourseValid, setIsCourseValid] = useState(false);  const handleSubmit = async (formData) => {
     if(isCourseValid){
       try {
@@ -36,12 +37,16 @@ const CreateClassPage = () => {
         });
         if (response.ok) {
           alert('Class created successfully');
+          router.push('/admin/classes');
         } else {
           alert('Failed to create class');
+          const data = await response.json();
+          setResMsg('Failed to create class: ' + data.message);
         }
       } catch (error) {
         console.error('Error creating class:', error);
       }
+      // console.log(formData);
     }
  
   };
@@ -80,8 +85,8 @@ const CreateClassPage = () => {
     <>
     <section className='flex justify-center items-center min-h-screen' >
       <button onClick={handleGoBack} className='hover:opacity-90 absolute top-10 left-10 bg-blue-500 px-4 py-2 border border-neutral-500 text-white rounded-lg'>Go back</button>
-      <ClassForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"} />
-      <CourseForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"}/>
+      <ClassForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"} resMsg={resMsg} />
+      <CourseForm initialData={initialData} checkCourseValidity={checkCourseValidity} onSubmit={handleSubmit} actionType={"createClass"} resMsg/>
     </section>
     </>
   );

@@ -8,7 +8,7 @@ const withAuth = (WrappedComponent, allowedRoles = []) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (!user) {
+      if (!user.role) {
         router.push('/login');
       } else if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
         router.push('/unauthorized'); // Redirect to an unauthorized page

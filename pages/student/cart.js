@@ -92,7 +92,7 @@ const CartPage = () => {
           const data = await response.json();
           if (response.ok) {
               alert("All classes registered successfully");
-              // router.reload();
+              router.reload();
               router.push("/student/cart");
           } else {
               alert('Failed to register all classes: ' + data.message);

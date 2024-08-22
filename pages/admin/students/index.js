@@ -58,17 +58,19 @@ const getAllStudentsPage = () => {
             <tr className="bg-gray-100 text-gray-700">
               <th className="py-2 px-4 border-b text-center">ID</th>
               <th className="py-2 px-4 border-b text-center">Name</th>
-              <th className="py-2 px-4 border-b text-center">Email</th>
-              <th className="py-2 px-4 border-b text-center">Course</th>
+              <th className="py-2 px-4 border-b text-center">Program</th>
+              <th className="py-2 px-4 border-b text-center">Max Credits</th>
+
+
             </tr>
           </thead>
           <tbody>
             {students.map((student) => (
               <tr key={student.id} className="hover:bg-gray-50">
-                <td className="py-2 px-4 border-b text-center">{student.id}</td>
+                <td className="py-2 px-4 border-b text-center">{student.studentId}</td>
                 <td className="py-2 px-4 border-b text-center">{student.name}</td>
-                <td className="py-2 px-4 border-b text-center">{student.email}</td>
-                <td className="py-2 px-4 border-b text-center">{student.course}</td>
+                <td className="py-2 px-4 border-b text-center">{student.program}</td>
+                <td className="py-2 px-4 border-b text-center">{student.maxCredits}</td>
               </tr>
             ))}
           </tbody>

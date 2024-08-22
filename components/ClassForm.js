@@ -1,5 +1,5 @@
 import { useState } from 'react';
-const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType }) => {
+const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType, resMsg }) => {
   const [classData, setClassData] = useState({
     classCode: initialData.classCode || '',
     maxStudents: initialData.maxStudents || 0,
@@ -9,6 +9,7 @@ const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType
     registrationDeadline: initialData.registrationDeadline || '',
     dayOfWeek: initialData.dayOfWeek || '',
   });
+  
   // console.log(typeof checkCourseValidity)
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +93,7 @@ const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType
         <div>
           <label className="block text-sm font-medium text-gray-700">Current Student Count</label>
           <input
-          readOnly={setConditionReadonly()}
+          readOnly
             type="number"
             name="currentStudentCount"
             value={classData.currentStudentCount}
@@ -128,15 +129,23 @@ const ClassForm = ({ initialData = {}, onSubmit, checkCourseValidity, actionType
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Class Days</label>
-          <input
+          {/* <input
           readOnly={setConditionReadonly()}
             type="text"
             name="dayOfWeek"
             value={classData.dayOfWeek}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
+          /> */}
+          <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" name="dayOfWeek" value={classData.dayOfWeek} onChange={handleChange}>
+          <option>MONDAY</option>
+          <option>TUESDAY</option>
+          <option>WEDNESDAY</option>
+          <option>THURSDAY</option>
+          <option>FRIDAY</option>
+        </select>
         </div>
+        {resMsg && <p className="text-red-500 text-sm">{resMsg}</p>}
         <button
         type="submit"
         className={

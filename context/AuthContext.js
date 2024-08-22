@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const router = useRouter();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userRole');
-    setUser(null);
+    setUser({});
     router.push('/login');
   };
 

@@ -43,7 +43,7 @@ import { useAuth } from '@/context/AuthContext';
   const filteredClasses = classes.filter(
     (course) =>
       course.course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      course.course.courseCode.toLowerCase().includes(searchTerm.toLowerCase())
+      course.classCode.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleEdit = (classCode) => {

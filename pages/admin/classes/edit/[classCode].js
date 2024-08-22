@@ -59,7 +59,7 @@ const EditClassPage = () => {
 
       if (response.ok) {
         alert('Class updated successfully');
-        router.push('/classes');
+        router.push('/admin/classes');
       } else {
         alert('Failed to update class');
       }

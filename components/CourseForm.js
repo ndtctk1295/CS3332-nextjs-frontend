@@ -1,5 +1,5 @@
 import { act, useEffect, useState } from "react";
-const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
+const CourseForm = ({ initialData = {}, onSubmit, actionType, resMsg }) => {
   const [courseData, setCourseData] = useState({
     courseCode: initialData.courseCode || "",
     name: initialData.name || "",
@@ -44,7 +44,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
     return true;
   };
   const setConditionButton = () => {
-    if(actionType === "editCourse" || actionType === "editClass" || actionType === "createClass"){
+    if( actionType === "editClass" || actionType === "createClass"){
       // console.log("hidden");
       return "hidden";
     }
@@ -135,6 +135,7 @@ const CourseForm = ({ initialData = {}, onSubmit, actionType }) => {
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
+      {resMsg && <div className="text-red-500 text-center">{resMsg}</div>}
       <button
         type="submit"
         className={

@@ -7,7 +7,7 @@ const EditCoursePage = () => {
   const router = useRouter();
   const { courseCode } = router.query;
   const [initialData, setInitialData] = useState(null);
-
+  const [msg, setMsg] = useState("");
   useEffect(() => {
     if (courseCode) {
       const fetchCourseData = async () => {
@@ -49,8 +49,10 @@ const EditCoursePage = () => {
       if (
         formData.courseCode === "" ||
         formData.name === "" ||
-        formData.duration === ""
+        formData.duration === "" ||
+        formData.credits == 0
       ) {
+        setMsg("Please fill in all fields and credits are not allowed to be 0");
         return;
       } else {
         const accessToken = localStorage.getItem("accessToken");
@@ -83,10 +85,9 @@ const EditCoursePage = () => {
 
   return (
     <div>
-      <h1>Edit Course</h1>
       <button onClick={handleGoBack} className='absolute top-10 left-10 bg-blue-500 px-4 py-2 hover:opacity-90 border border-neutral-500 text-white rounded-lg'>Go back</button>
 
-      <CourseForm actionType={"editCourse"} initialData={initialData} onSubmit={handleSubmit} />
+      <CourseForm actionType={"editCourse"} initialData={initialData} onSubmit={handleSubmit} resMsg={msg}/>
     </div>
   );
 };
